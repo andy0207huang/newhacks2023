@@ -9,7 +9,7 @@
   
   <h3 align="center">NewHacks 2023, UOFT, November 4-5, 2023</h3>
 
-  <a href="https://manytools.org/hacker-tools/convert-images-to-ascii-art/">ASCII art generator for geeks! - Convert images/pictures to ASCII art online! (HTML/text)</a>
+  <a href="./ascii-art.html"></a>
 
   <p align="center">
     Project Description.
