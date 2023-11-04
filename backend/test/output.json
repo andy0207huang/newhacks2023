@@ -1,0 +1,36 @@
+{
+    "start_date": "2023-11-04",
+    "final_deadline": "2023-12-07",
+    "tasks": [
+        {
+            "task": "Task 1",
+            "description": "Research and gather information",
+            "recommended_deadline": "2023-11-07"
+        },
+        {
+            "task": "Task 2",
+            "description": "Outline and create a project plan",
+            "recommended_deadline": "2023-11-10"
+        },
+        {
+            "task": "Task 3",
+            "description": "Begin drafting the project",
+            "recommended_deadline": "2023-11-15"
+        },
+        {
+            "task": "Task 4",
+            "description": "Review and revise the project",
+            "recommended_deadline": "2023-11-20"
+        },
+        {
+            "task": "Task 5",
+            "description": "Proofread and make final edits",
+            "recommended_deadline": "2023-11-24"
+        },
+        {
+            "task": "Task 6",
+            "description": "Submit the completed project",
+            "recommended_deadline": "2023-11-27"
+        }
+    ]
+}
