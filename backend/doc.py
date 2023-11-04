@@ -17,7 +17,6 @@ def getDoc(path):
             for page in pdf.pages:
                 text += page.extract_text()
 
-
             return text
         
 
