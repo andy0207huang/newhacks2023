@@ -1,0 +1,2 @@
+def getfolder(path):
+    pass
