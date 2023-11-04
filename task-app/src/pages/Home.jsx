@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Calenderjfg from "../components/Calendar";
 import logo from '../assets/breakject.ai-s.png';
+import { uploadFile, testBackend } from '../api';
+
 
 const Home = () => {
     // upload file
@@ -9,22 +11,31 @@ const Home = () => {
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
-        // Send the file to the backend for AI scraping
-        // You can make an API request to your backend here
-        // and handle the file processing on the server side
     };
-
-    // backend test
+    
+    // upload reponse
     const [testResponse, setTestResponse] = useState('');
-    const handleTestClick = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/test');
-            const data = await response.json();
-            setTestResponse(data.msg);
-        } catch (error) {
-            console.error(error);
+    const handleUploadClick = async () => {
+        if (selectedFile) {
+            try {
+                const response = await uploadFile(selectedFile);
+                console.log(response);
+                setTestResponse(response.msg);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
+
+    // TEST
+    // const handleTestClick = async () => {
+    //     try {
+    //         const response = await testBackend();
+    //         setTestResponse(response);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
     return (
         <div>
@@ -37,9 +48,11 @@ const Home = () => {
 
             {/* upload */}
             <input type="file" onChange={handleFileUpload} />
-            <button onClick={handleTestClick} disabled={!selectedFile}>Upload</button>
+            <button onClick={handleUploadClick} disabled={!selectedFile}>Upload</button>
 
             <p>Test Response: {testResponse}</p>
+
+
 
         </div>
     );
