@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Calenderjfg from "../components/Calendar";
 
 const Home = () => {
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+        // Send the file to the backend for AI scraping
+        // You can make an API request to your backend here
+        // and handle the file processing on the server side
+    };
+
     return (
         <div>
             <h1>Welcome to TaskBreaker!</h1>
@@ -11,7 +21,8 @@ const Home = () => {
             <Calenderjfg />
 
             {/* upload */}
-            
+            <input type="file" onChange={handleFileUpload} />
+            <button disabled={!selectedFile}>Upload</button>
 
         </div>
     );
