@@ -53,6 +53,6 @@ We were inspired by:
 [linkedin-shield-andy]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0072b1
 [linkedin-url-andy]: https://www.linkedin.com/in/andy-snowflake-huang/
 [linkedin-shield-marcus]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0072b1
-[linkedin-url-marcus]: a
+[linkedin-url-marcus]: https://www.linkedin.com/in/marcus-tuen-muk/
 [linkedin-shield-surya]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0072b1
-[linkedin-url-surya]: a
+[linkedin-url-surya]: https://www.linkedin.com/in/surya-sure-9ba9b2220/
