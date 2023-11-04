@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Calenderjfg from "../components/Calendar";
+import logo from '../assets/breakject.ai-s.png';
 
 const Home = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -14,7 +15,8 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Welcome to TaskBreaker!</h1>
+            <img src={logo} style={{ height: '200px', width: '200px' }} alt="breakject.ai Logo" />
+            <h1>Welcome to breakject.ai!</h1>
             <p>Break down your projects and assignments into smaller tasks and deadlines for enhanced productivity.</p>
 
             {/* g calendar integration */}
