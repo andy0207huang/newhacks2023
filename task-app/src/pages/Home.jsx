@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Calenderjfg from "../components/Calendar";
+import AuthButton from "../components/AuthButton";
 import logo from '../assets/breakject.ai-s.png';
 import { uploadFile, testBackend } from '../api';
 
@@ -12,9 +13,10 @@ const Home = () => {
         const file = event.target.files[0];
         setSelectedFile(file);
     };
-    
+
     // upload reponse
     const [testResponse, setTestResponse] = useState('');
+
     const handleUploadClick = async () => {
         if (selectedFile) {
             try {
@@ -44,6 +46,7 @@ const Home = () => {
             <p>Break down your projects and assignments into smaller tasks and deadlines for enhanced productivity.</p>
 
             {/* g calendar integration */}
+            <AuthButton />
             <Calenderjfg />
 
             {/* upload */}
@@ -52,10 +55,8 @@ const Home = () => {
 
             <p>Test Response: {testResponse}</p>
 
-
-
         </div>
     );
-};
+}
 
 export default Home;
