@@ -2,11 +2,14 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
+
 <div align="center">
   <a href="https://github.com/andy0207huang/newhacks2023">
   </a>
   
   <h3 align="center">NewHacks 2023, UOFT, November 4-5, 2023</h3>
+
+  <a href="https://manytools.org/hacker-tools/convert-images-to-ascii-art/">ASCII art generator for geeks! - Convert images/pictures to ASCII art online! (HTML/text)</a>
 
   <p align="center">
     Project Description.
