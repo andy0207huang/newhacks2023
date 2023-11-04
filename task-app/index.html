@@ -5,34 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    <style>
-      /* Style the container of the iframe */
-      .styled-calendar-container {
-        width: 80%; /* Adjust the width as needed */
-        border: none;
-        height: 100px; /* Adjust the height as needed */
-        border: 1px solid #ccc; /* Add a border if desired */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow if desired */
-        margin: 0 auto; /* Center horizontally */
-        display: flex;
-        justify-content: center; /* Center vertically */
-        align-items: center;
-      }
-    </style>
   </head>
   <body>
     <div id="root"></div>
-    <iframe
-      src="https://embed.styledcalendar.com/#LkGMOk5NB7mv2ULOHIOV"
-      title="Styled Calendar"
-      class="styled-calendar-container"
-      data-cy="calendar-embed-iframe"
-    ></iframe>
-    <script
-      async
-      type="module"
-      src="https://embed.styledcalendar.com/assets/parent-window.js"
-    ></script>
     <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>

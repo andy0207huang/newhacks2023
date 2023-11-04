@@ -42,9 +42,8 @@ const Home = () => {
       </p>
 
       {/* g calendar integration */}
-      <Calenderjfg />
       <AuthButton />
-
+      <Calenderjfg />
       {/* upload */}
       <input type="file" onChange={handleFileUpload} />
       <button onClick={handleTestClick} disabled={!selectedFile}>
