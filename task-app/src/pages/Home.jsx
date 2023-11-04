@@ -3,6 +3,7 @@ import Calenderjfg from "../components/Calendar";
 import logo from '../assets/breakject.ai-s.png';
 
 const Home = () => {
+    // upload file
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileUpload = (event) => {
@@ -11,6 +12,18 @@ const Home = () => {
         // Send the file to the backend for AI scraping
         // You can make an API request to your backend here
         // and handle the file processing on the server side
+    };
+
+    // backend test
+    const [testResponse, setTestResponse] = useState('');
+    const handleTestClick = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/test');
+            const data = await response.json();
+            setTestResponse(data.msg);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -24,7 +37,9 @@ const Home = () => {
 
             {/* upload */}
             <input type="file" onChange={handleFileUpload} />
-            <button disabled={!selectedFile}>Upload</button>
+            <button onClick={handleTestClick} disabled={!selectedFile}>Upload</button>
+
+            <p>Test Response: {testResponse}</p>
 
         </div>
     );
