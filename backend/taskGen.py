@@ -13,7 +13,7 @@ openai.api_key = os.environ.get("API_KEY")
 
 
 def getTaskList(path, start, end):
-  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description for each task and output the whole thing as a JSON file."
+  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file"
 
   document = doc.getDoc(path)
 
@@ -22,11 +22,13 @@ def getTaskList(path, start, end):
   completion = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "user", "content": prompt}
+        {"role": "user", "content": text}
     ]
-  ) 
+  )
 
   tasks =  completion.choices[0].message["content"]
+
+  tasks = tasks.replace("```", "").replace("\n", "").replace("\\", "").replace('json', '')
 
   tasks = tasks[:tasks.rfind('}') + 1]
 
@@ -40,17 +42,6 @@ def getTaskList(path, start, end):
 if __name__ == "__main__":
   tasks = getTaskList('./test/Team_Presentation_Overview_Slides.pdf', 'Nov. 4, 2023', 'Dec. 7, 2023')
 
-  tasks = tasks.replace("```", "").replace("\n", "").replace("\\", "").replace('json', '')
-
-  # with open('./test/output.txt', 'w') as f:
-  #   f.write(tasks)
-  #   f.close()
-
-  # tasks = ""
-
-  # with open('./test/output.txt', 'r') as f:
-  #   tasks = f.read()
-  #   f.close()
 
   print(tasks)
 
