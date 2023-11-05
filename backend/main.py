@@ -7,14 +7,14 @@ from taskGen import getTaskList
 
 app = Flask(__name__)
 
-allowed_origins = ["http://127.0.0.1:5173/"]
-CORS(app, origins=allowed_origins, supports_credentials=True)
+# allowed_origins = ["http://127.0.0.1:5173/"]
+CORS(app, origins="*", supports_credentials=True)
 
 
 @app.route("/text2break", methods=["POST"])
 def text_prompt():
     response = jsonify({"msg": "text"})
-    response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
+    # response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
     return response
 
 
@@ -39,7 +39,7 @@ def pdf_prompt():
         'text': taskListText,
         "msg": "dank"
         })
-    response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
+    # response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
 
     return response
 
