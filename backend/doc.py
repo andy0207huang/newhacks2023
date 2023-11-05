@@ -27,13 +27,13 @@ if __name__ == "__main__":
             f.write(text)
             f.close()
 
-#     with open('./test/Lab 3 - Multi-threaded Socket Programming.pdf', 'rb') as f:
+#     with open('./test/SE3309a2022asgn03.pdf', 'rb') as f:
 
 #             text = getDoc(f)
 
 #             f.close()
 
     
-#     with open('./test/test.txt', 'w') as f:
+#     with open('./test/test.txt', 'w', encoding="utf-8") as f:
 #             f.write(text)
 #             f.close()
