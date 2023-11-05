@@ -43,19 +43,16 @@ const Home = () => {
         Break down your projects and assignments into smaller tasks and
         deadlines for enhanced productivity.
       </p>
-
       {/* g calendar integration */}
       <TaskList />
       <AuthButton />
       <Calenderjfg />
-
-      {/* upload
+      upload
       <input type="file" onChange={handleFileUpload} />
       <button onClick={handleUploadClick} disabled={!selectedFile}>
         Upload
       </button>
-
-      <p>Test Response: {testResponse}</p> */}
+      <p>Test Response: {testResponse}</p>
     </div>
   );
 };
