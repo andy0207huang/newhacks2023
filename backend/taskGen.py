@@ -22,7 +22,7 @@ def getTaskList(doc: str, start: str, end: str) -> list:
   Returns:
       (list): a list of sub tasks 
   """
-  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file.  The keys in each task for the JSON should be task, description, status, and deadline."
+  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file."
 
 
   text = f"{prompt}\n```\n{doc}\n```"
@@ -47,7 +47,7 @@ def getTaskList(doc: str, start: str, end: str) -> list:
 
 if __name__ == "__main__":
 
-  file = open('./backend/test/test.txt', 'r')
+  file = open('./test/test.txt', 'r')
 
   tasks = getTaskList(file, 'Nov. 4, 2023', 'Dec. 7, 2023')
 
