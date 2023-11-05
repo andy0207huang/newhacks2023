@@ -23,7 +23,7 @@ const Home = () => {
         const response = await uploadFile(selectedFile);
         console.log(response);
         // Handle the response as needed
-        setTestResponse(response.filename);
+        setTestResponse(response.text);
       } catch (error) {
         console.error(error);
       }

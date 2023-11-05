@@ -42,7 +42,7 @@ def getTaskList(doc: str, start: str, end: str) -> json:
 
   tasks = ast.literal_eval(tasks)
 
-  tasksJson = json.dumps(tasks, indent=4)
+  tasksJson = json.dumps(tasks)
 
   tasksJson = json.loads(tasksJson)
 
