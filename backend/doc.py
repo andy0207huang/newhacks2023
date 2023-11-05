@@ -11,6 +11,8 @@ def getDoc(file):
     for page in pdf.pages:
             text += page.extract_text()
 
+    text = text.replace("\n", "")
+
     return text
 
 if __name__ == "__main__":
@@ -25,13 +27,13 @@ if __name__ == "__main__":
             f.write(text)
             f.close()
 
-    with open('./test/Lab 3 - Multi-threaded Socket Programming.pdf', 'rb') as f:
+    # with open('./test/Lab 3 - Multi-threaded Socket Programming.pdf', 'rb') as f:
 
-            text = getDoc(f)
+    #         text = getDoc(f)
 
-            f.close()
+    #         f.close()
 
     
-    with open('./test/test.txt', 'w') as f:
-            f.write(text)
-            f.close()
+    # with open('./test/test.txt', 'w') as f:
+    #         f.write(text)
+    #         f.close()
