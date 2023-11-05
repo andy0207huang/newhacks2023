@@ -1,6 +1,7 @@
 import os.path
 
 from datetime import datetime
+from dateutil.parser import parse
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -27,7 +28,7 @@ def createEvent(datas: list):
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=5173)
+            creds = flow.run_local_server(port=8000)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
@@ -53,48 +54,65 @@ def createEvent(datas: list):
 
     for data in datas:
 
-        startList = data['Starttime'].split(' ')
+        # startList = data['Starttime'].split(' ')
+        
+        # if len(startList[0]) > 2:
+        #     startList[0] = startList[0][:3]
 
-        if len(startList[0]) > 2:
-            startList[0] = startList[0][:3]
+        
+        # startMonth = months[startList[0]]
 
-        startMonth = months[startList[0]]
+        # startDay = startList[1].replace(',', '').zfill(2)
 
-        startDay = startList[1].replace(',', '').zfill(2)
+        # startYear = startList[2]
+        # endList = data['Deadline'].split(' ')
 
-        startYear = startList[2]
+        
 
-        endList = data['Deadline'].split(' ')
+        # if len(endList[0]) > 2:
+        #     endList[0] = endList[0][:3]
 
-        if len(endList[0]) > 2:
-            endList[0] = endList[0][:3]
+        # endMonth = months[endList[0]]
 
-        endMonth = months[endList[0]]
+        # if endList[1].endswith('th'):
 
-        endDay = endList[1].replace(',', '').zfill(2)
+        #     endList[1] = endList[1].replace('th','')
 
-        endYear = endList[2]
+        # elif endList[1].endswith('st'):
+        #     endList[1] = endList[1].replace('st','')
 
-        startDate = f"{startYear}-{startMonth}-{startDay}"
+        # if len(endList[1]) > 2:
+        #     endList[1] = endList[1][:3]
 
-        endDate = f"{endYear}-{endMonth}-{endDay}"
+
+        # endDay = endList[1].replace(',', '').zfill(2)
+
+        # print(endDay)
+
+        # endYear = endList[2]
+
+        # startDate = f"{startYear}-{startMonth}-{startDay}"
+
+        # endDate = f"{endYear}-{endMonth}-{endDay}"
 
 
         dateFormat = "%Y-%m-%d"
 
-        startDate = datetime.strptime(startDate, dateFormat).date()
-        endDate = datetime.strptime(endDate, dateFormat).date()
+        startDate = parse(data['Starttime']).date()
+        endDate = parse(data['Deadline']).date()
     
         event = {
             'summary': data['Task'],
             'description': data['Description'],
             'start':{
-                'date': startDate
+                'date': datetime.strftime(startDate, dateFormat)
             },
             'end':{
-                'date': endDate
+                'date': datetime.strftime(endDate, dateFormat)
             }
         }
+
+        print(event)
 
         event = service.events().insert(calendarId='primary', body=event).execute()
 

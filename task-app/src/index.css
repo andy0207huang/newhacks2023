@@ -107,3 +107,8 @@ b {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.cal-url {
+  border-radius: 3px;
+  margin: 10px;
+}

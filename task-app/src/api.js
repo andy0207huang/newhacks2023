@@ -26,6 +26,8 @@ export const uploadFile = async (file) => {
 // Create event
 export const createEvent = async (events) => {
   try {
+    console.log(events)
+
     const response = await fetch(`${BASE_URL}/createEvent`, {
       method: "POST",
       headers: {
