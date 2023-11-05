@@ -1,6 +1,5 @@
 import os
 import openai
-import doc
 import json
 import ast
 
@@ -12,12 +11,21 @@ load_dotenv('.env')
 openai.api_key = os.environ.get("API_KEY")
 
 
-def getTaskList(path, start, end):
-  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file"
+def getTaskList(doc: str, start: str, end: str) -> list:
+  """Turns the text of a assignment doc into a timeline of tasks for it
 
-  document = doc.getDoc(path)
+  Args:
+      doc (str): text from the document
+      start (str): start date
+      end (str): end date
 
-  text = f"{prompt}\n```\n{document}\n```"
+  Returns:
+      (list): a list of sub tasks 
+  """
+  prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file."
+
+
+  text = f"{prompt}\n```\n{doc}\n```"
 
   completion = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
@@ -34,14 +42,14 @@ def getTaskList(path, start, end):
 
   tasks = ast.literal_eval(tasks)
 
-  tasksJson = json.dumps(tasks, indent=4)
-
-  return tasksJson
+  return tasks['tasks']
 
 
 if __name__ == "__main__":
-  tasks = getTaskList('./test/Team_Presentation_Overview_Slides.pdf', 'Nov. 4, 2023', 'Dec. 7, 2023')
 
+  file = open('./test/test.txt', 'r')
+
+  tasks = getTaskList(file, 'Nov. 4, 2023', 'Dec. 7, 2023')
 
   print(tasks)
 
