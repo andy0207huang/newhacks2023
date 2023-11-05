@@ -9,12 +9,12 @@ import TaskList from "../components/TaskList";
 
 const Home = () => {
   // upload file
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
+  // const handleFileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+  // };
 
   // backend test
   const [testResponse, setTestResponse] = useState("");
@@ -49,12 +49,12 @@ const Home = () => {
       <TaskList />
       <AuthButton />
       <Calenderjfg />
-      upload
+      {/* upload
       <input type="file" onChange={handleFileUpload} />
       <button onClick={handleUploadClick} disabled={!selectedFile}>
         Upload
       </button>
-      <p>Test Response: {testResponse}</p>
+      <p>Test Response: {testResponse}</p> */}
     </div>
   );
 };
