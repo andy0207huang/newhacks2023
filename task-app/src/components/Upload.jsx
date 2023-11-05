@@ -153,19 +153,19 @@ const Upload = () => {
                 {/* TEST */}
                 <div>
                     <p>Project Start Date</p>
-                <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    placeholderText="Select start date"
-                    dateFormat="MMMM d, yyyy"
-                />
-                <p>Project End Date</p>
-                <DatePicker
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    placeholderText="Select end date"
-                    dateFormat="MMMM d, yyyy"
-                />
+                    <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        placeholderText="Select start date"
+                        dateFormat="MMMM d, yyyy"
+                    />
+                    <p>Project End Date</p>
+                    <DatePicker
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                        placeholderText="Select end date"
+                        dateFormat="MMMM d, yyyy"
+                    />
                 </div>
 
                 <input type="file" onChange={handleFileUpload} />
