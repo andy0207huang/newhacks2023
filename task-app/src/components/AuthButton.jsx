@@ -100,7 +100,7 @@ class CalendarIntegration extends Component {
             </ul>
           </div>
         ) : (
-          <div>
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
             <p>Sign in with your Google account to view calendar events.</p>
             <button onClick={() => gapi.auth2.getAuthInstance().signIn()}>
               Sign In
