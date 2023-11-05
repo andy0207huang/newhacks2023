@@ -11,7 +11,7 @@ load_dotenv('.env')
 openai.api_key = os.environ.get("API_KEY")
 
 
-def getTaskList(doc: str, start: str, end: str) -> json:
+def getTaskList(doc: str, start: str, end: str) -> list:
   """Turns the text of a assignment doc into a timeline of tasks for it
 
   Args:
@@ -20,7 +20,7 @@ def getTaskList(doc: str, start: str, end: str) -> json:
       end (str): end date
 
   Returns:
-      _type_: _description_
+      (list): a list of sub tasks 
   """
   prompt = f"Assuming the start date is {start}, and the final deadline is {end}, generate a general timeline with recommended deadlines for each task in the following text delimited by three backticks. Add a description and Not Started status for each task and output the whole thing as a JSON file.  The keys in each task for the JSON should be task, description, status, and deadline."
 
