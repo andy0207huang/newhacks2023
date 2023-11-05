@@ -102,7 +102,11 @@ th {
   margin: 20px auto;
 }
 
-.cal-url {
+#cal-url {
   border-radius: 3px;
   margin: 10px;
+}
+
+td {
+  color: white;
 }
