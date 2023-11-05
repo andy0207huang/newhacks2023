@@ -52,7 +52,7 @@ button {
 }
 button:hover {
   color: black;
-  background-color: #F39041;
+  background-color: #f39041;
 }
 button:focus,
 button:focus-visible {
@@ -71,14 +71,11 @@ button:focus-visible {
 } */
 
 iframe {
-  width: 80%; /* Adjust the width as needed */
-  border: none;
-  height: 50px; /* Adjust the height as needed */
   border: 1px solid #ccc; /* Add a border if desired */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow if desired */
   margin: 0 auto; /* Center horizontally */
   /* Center vertically */
-  border-radius: 20px;
+  border-radius: 0px;
 }
 
 .calendar-container {
@@ -89,7 +86,7 @@ iframe {
 
 td {
   color: black;
-  border: solid #F39041;
+  border: solid #f39041;
 }
 tr,
 th {
