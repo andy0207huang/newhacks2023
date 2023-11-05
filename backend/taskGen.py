@@ -50,10 +50,19 @@ def getTaskList(doc: str, start: str, end: str) -> list:
   # tasks = tasks.replace("```", "").replace("\n", "").replace("\\", "").replace('json', '')
 
   # tasks = tasks[:tasks.rfind('}') + 1]
+  tasks = [i+'}' for i in tasks.split("}")]
 
-  # tasks = ast.literal_eval(tasks)
+  tasks = tasks[:len(tasks)-1]
 
-  return tasks
+  taskList = []
+
+  for task in tasks:
+
+    task = ast.literal_eval(task)
+
+    taskList.append(task)
+
+  return taskList
 
 
 if __name__ == "__main__":
