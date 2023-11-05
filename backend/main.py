@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from doc import getDoc
+from taskGen import getTaskList
+
 app = Flask(__name__)
 
 allowed_origins = ["http://127.0.0.1:5173/"]
