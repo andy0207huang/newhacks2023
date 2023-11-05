@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -24,8 +25,18 @@ def pdf_prompt():
     file = request.files['file']
     filename = file.filename
 
+    text = getDoc(file)
+
+    # openai free limit of 4096 tokens
+    if len(text) > 4096:
+        taskListText = getTaskList(text[0:4095], "November 4th, 2023", "November 30th, 2023")
+    else:
+        taskListText = getTaskList(text, "November 4th, 2023", "November 30th, 2023")
+
     response = jsonify({
         'filename': filename, 
+        # 'text': text,
+        'text': taskListText,
         "msg": "dank"
         })
     response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
