@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 // import DatePicker from "@mui/lab/DatePicker";
 
 
-import { uploadFile } from "../api";
+import { uploadFile, createEvent } from "../api";
 
 const Upload = () => {
     // loader
