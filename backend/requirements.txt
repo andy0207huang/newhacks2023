@@ -3,3 +3,7 @@ textract
 python-docx
 redis
 openai
+flask
+flask-cors
+python-dotenv
+

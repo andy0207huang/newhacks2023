@@ -1,8 +1,7 @@
 import os
 
 from PyPDF2 import PdfReader
-from textract import process
-from docx import Document
+
 
 def getDoc(file):
         
