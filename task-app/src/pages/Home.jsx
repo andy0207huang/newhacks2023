@@ -41,7 +41,7 @@ const Home = () => {
       />
       <h1>Welcome to breakject.ai!</h1>
       <p>
-        Break down your projects and assignments into smaller tasks and
+        An AI-integration tool that <b>breaks down</b> your <b>projects</b> and assignments into smaller tasks and
         deadlines for enhanced productivity.
       </p>
 

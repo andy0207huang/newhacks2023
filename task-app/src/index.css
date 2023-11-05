@@ -101,3 +101,9 @@ th {
 .auth-btn {
   margin: 20px auto;
 }
+
+b {
+  background-image: linear-gradient(to right, #7C8DFD, #F39041);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
