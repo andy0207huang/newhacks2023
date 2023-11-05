@@ -4,6 +4,11 @@ import { PacmanLoader } from "react-spinners";
 import { FaCheck, FaTimes, FaCog, FaTrash } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { TextField, Select } from "@mui/material";
+import MenuItem from '@mui/material/MenuItem';
+// import dayjs from "dayjs";
+// import DatePicker from "@mui/lab/DatePicker";
+
 
 import { uploadFile } from "../api";
 
@@ -73,7 +78,7 @@ const Upload = () => {
     const handleStatusChange = (index, value) => {
         const updatedTableData = [...tableData];
         updatedTableData[index].Status = value;
-        // setTableData(updatedTableData);
+        setTableData(updatedTableData);
     };
 
     const handleDeadlineChange = (index, date) => {
@@ -104,7 +109,7 @@ const Upload = () => {
     };
 
     // handle Add to Calendar button click
-    const handleAddToCalendar = () => {
+    const handleAddToCalendar = async () => {
         const finalValues = tableData.map((item) => ({
             Task: item.Task,
             Description: item.Description,
@@ -114,6 +119,15 @@ const Upload = () => {
         }));
         console.log(finalValues);
         // setSavedValues(finalValues);
+
+        try {
+            const data = await createEvent(finalValues);
+            console.log(data.msg);
+        } catch (error) {
+            console.error(error);
+            // Handle error case
+        }
+
     };
 
     return (
@@ -156,10 +170,14 @@ const Upload = () => {
                                             {/* <td>{item.Task}</td> */}
                                             <td>
                                                 {item.isEditing ? (
-                                                    <input
+                                                    <TextField
                                                         type="text"
                                                         value={item.Task}
+                                                        fullWidth
+                                                        label="Task"
                                                         onChange={(e) => handleTaskChange(index, e.target.value)}
+                                                        multiline
+                                                        maxRows={4}
                                                     />
                                                 ) : (
                                                     item.Task
@@ -167,10 +185,14 @@ const Upload = () => {
                                             </td>
                                             <td>
                                                 {item.isEditing ? (
-                                                    <input
+                                                    <TextField
                                                         type="text"
                                                         value={item.Description}
+                                                        fullWidth
+                                                        label="Description"
                                                         onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                                                        multiline
+                                                        maxRows={4}
                                                     />
                                                 ) : (
                                                     item.Description
@@ -178,14 +200,16 @@ const Upload = () => {
                                             </td>
                                             <td>
                                                 {item.isEditing ? (
-                                                    <select
+                                                    // <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                                    <Select
                                                         value={item.Status}
-                                                    // onChange={(e) => handleStatusChange(index, e.target.value)}
+                                                        onChange={(e) => handleStatusChange(index, e.target.value)}
                                                     >
-                                                        <option value="Not Started">Not Started</option>
-                                                        <option value="In Progress">In Progress</option>
-                                                        <option value="Completed">Completed</option>
-                                                    </select>
+                                                        <MenuItem value="Not Started">Not Started</MenuItem>
+                                                        <MenuItem value="In Progress">In Progress</MenuItem>
+                                                        <MenuItem value="Completed">Completed</MenuItem>
+                                                    </Select>
+                                                    // </FormControl>
                                                 ) : (
                                                     item.Status
                                                 )}
@@ -194,6 +218,7 @@ const Upload = () => {
                                                 {item.isEditing ? (
                                                     <DatePicker
                                                         selected={new Date(item.Deadline)}
+                                                        // value = {dayjs(item.Deadline)}
                                                         onChange={(date) => handleDeadlineChange(index, date)}
                                                         dateFormat="MMMM d, yyyy"
                                                     />
@@ -205,17 +230,17 @@ const Upload = () => {
                                                 {item.isEditing ? (
                                                     <>
                                                         <FaCheck
-                                                            style={{ marginRight: "10px", cursor: "pointer" }}
+                                                            style={{ marginRight: "10px", cursor: "pointer", color: "green" }}
                                                             onClick={() => handleSaveRow(index)}
                                                         />
                                                         <FaTimes
-                                                            style={{ cursor: "pointer" }}
+                                                            style={{ cursor: "pointer", color: "red" }}
                                                             onClick={() => handleCancelEdit(index)}
                                                         />
                                                     </>
                                                 ) : (
                                                     <FaCog
-                                                        style={{ marginRight: "10px", cursor: "pointer" }}
+                                                        style={{ marginRight: "10px", cursor: "pointer", color: "gray" }}
                                                         onClick={() => handleEditRow(index)}
                                                     />
                                                 )}
