@@ -1,6 +1,4 @@
 PyPDF2
-textract
-python-docx
 redis
 openai
 flask
