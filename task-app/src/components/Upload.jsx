@@ -128,7 +128,18 @@ const Upload = () => {
             console.error(error);
             // Handle error case
         }
+    };
 
+    // AddTask
+    const handleAddTask = () => {
+        const newTask = {
+            Task: "",
+            Description: "",
+            Status: "Not Started",
+            Deadline: new Date(),
+            isEditing: true,
+        };
+        setTableData([...tableData, newTask]);
     };
 
     return (
@@ -172,6 +183,7 @@ const Upload = () => {
                                             <td>
                                                 {item.isEditing ? (
                                                     <TextField
+                                                        required
                                                         type="text"
                                                         value={item.Task}
                                                         fullWidth
@@ -187,6 +199,7 @@ const Upload = () => {
                                             <td>
                                                 {item.isEditing ? (
                                                     <TextField
+                                                        required
                                                         type="text"
                                                         value={item.Description}
                                                         fullWidth
@@ -254,6 +267,8 @@ const Upload = () => {
                                     ))}
                                 </tbody>
                             </table>
+
+                            <button onClick={handleAddTask}>Add Task</button>
                             <button onClick={handleAddToCalendar}>Add to Calendar</button>
                             <button onClick={closeModal}>Close</button>
                         </div>
