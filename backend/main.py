@@ -1,4 +1,6 @@
 import os
+import json
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -46,9 +48,9 @@ def pdf_prompt():
 
 @app.route("/createEvent", methods=["POST"])
 def eventCreate():
-    eventList = request.form.get("events")
+    eventList = request.json
 
-    createEvent(eventList)
+    createEvent(eventList['events'])
 
     response = jsonify({
         'msg': "Events Saved in Calendar"

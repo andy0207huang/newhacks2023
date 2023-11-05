@@ -27,7 +27,7 @@ def createEvent(datas: list):
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=5173)
+            creds = flow.run_local_server(port=8000)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
@@ -53,17 +53,19 @@ def createEvent(datas: list):
 
     for data in datas:
 
-        startList = data['Starttime'].split(' ')
+        
 
+        startList = data['Starttime'].split(' ')
+        
         if len(startList[0]) > 2:
             startList[0] = startList[0][:3]
 
+        
         startMonth = months[startList[0]]
 
         startDay = startList[1].replace(',', '').zfill(2)
 
         startYear = startList[2]
-
         endList = data['Deadline'].split(' ')
 
         if len(endList[0]) > 2:
@@ -89,12 +91,14 @@ def createEvent(datas: list):
             'summary': data['Task'],
             'description': data['Description'],
             'start':{
-                'date': startDate
+                'date': datetime.strftime(startDate, dateFormat)
             },
             'end':{
-                'date': endDate
+                'date': datetime.strftime(endDate, dateFormat)
             }
         }
+
+        print(event)
 
         event = service.events().insert(calendarId='primary', body=event).execute()
 
