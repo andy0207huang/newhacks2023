@@ -8,29 +8,31 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
-if not creds or not creds.valid:
-    if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-    else:
-        flow = InstalledAppFlow.from_client_secrets_file(
-            'credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
-    # Save the credentials for the next run
-    with open('token.json', 'w') as token:
-        token.write(creds.to_json())
 
-service = build('calendar', 'v3', credentials=creds)
+def createEvent(datas: list):
 
-def createEvent(datas: list, start: str,):
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+    creds = None
+        # The file token.json stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+    if os.path.exists('token.json'):
+            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=5173)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    service = build('calendar', 'v3', credentials=creds)
 
     months = {
         'Jan': 1,
@@ -47,18 +49,20 @@ def createEvent(datas: list, start: str,):
         'Dec': 12
     }
 
-    startList = start.split(' ')
-
-    if len(startList[0]) > 2:
-        startList[0] = startList[0][:3]
-
-    startMonth = months[startList[0]]
-
-    startDay = startList[1].replace(',', '').zfill(2)
-
-    startYear = startList[2]
+    
 
     for data in datas:
+
+        startList = data['Starttime'].split(' ')
+
+        if len(startList[0]) > 2:
+            startList[0] = startList[0][:3]
+
+        startMonth = months[startList[0]]
+
+        startDay = startList[1].replace(',', '').zfill(2)
+
+        startYear = startList[2]
 
         endList = data['Deadline'].split(' ')
 
@@ -100,9 +104,8 @@ if __name__ == "__main__":
         'Task': 'Test',
         'Description': 'Testing Test Code',
         'Status': 'Not Started',
+        'Starttime': 'November 4, 2023',
         'Deadline': 'November 6, 2023'
     }]
 
-    start = 'November 4, 2023'
-
-    createEvent(data, start)
+    createEvent(data)
