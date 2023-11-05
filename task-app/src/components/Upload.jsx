@@ -6,26 +6,29 @@ import { PacmanLoader } from "react-spinners";
 import { uploadFile } from "../api";
 
 const Upload = () => {
+    // loader
     const [isLoading, setIsLoading] = useState(false);
+    // popup
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // generated task list table
+    const [tableData, setTableData] = useState([]);
 
+    // choose file
     const [selectedFile, setSelectedFile] = useState(null);
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
     };
 
-    // backend test
-    const [testResponse, setTestResponse] = useState("");
+    // upload file
     const handleUploadClick = async () => {
         setIsLoading(true);
         setIsModalOpen(true);
         if (selectedFile) {
             try {
                 const response = await uploadFile(selectedFile);
-                console.log(response);
-                // Handle the response as needed
-                setTestResponse(response.filename);
+                console.log(response.text);
+                setTableData(response.text);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -34,6 +37,7 @@ const Upload = () => {
         }
     };
 
+    // close popup
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -58,8 +62,31 @@ const Upload = () => {
                         </div>
                     ) : (
                         <div>
+                            {/* title */}
                             <h2 style={{ color: "black" }}>Test Response</h2>
-                            <p style={{ color: "black" }}>{testResponse}</p>
+                            {/* <p style={{ color: "black" }}>{testResponse}</p> */}
+
+                            {/* generated task table */}
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Deadline</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {tableData.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.Task}</td>
+                                            <td>{item.Description}</td>
+                                            <td>{item.Status}</td>
+                                            <td>{item.Deadline}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     )}
                     <button onClick={closeModal}>Close</button>
