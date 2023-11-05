@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { PacmanLoader } from "react-spinners";
-import { FaCog, FaTrash } from "react-icons/fa";
+import { FaCheck, FaTimes, FaCog, FaTrash } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,6 +14,9 @@ const Upload = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     // generated task list table
     const [tableData, setTableData] = useState([]);
+    // edit state task list table
+    const [editedTaskList, setEditedTaskList] = useState([]);
+
 
     // choose file
     const [selectedFile, setSelectedFile] = useState(null);
@@ -70,13 +73,47 @@ const Upload = () => {
     const handleStatusChange = (index, value) => {
         const updatedTableData = [...tableData];
         updatedTableData[index].Status = value;
-        setTableData(updatedTableData);
+        // setTableData(updatedTableData);
     };
 
     const handleDeadlineChange = (index, date) => {
         const updatedTableData = [...tableData];
-        updatedTableData[index].Deadline = date;
+        updatedTableData[index].Deadline = String(date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
         setTableData(updatedTableData);
+    };
+
+    // edit
+    const handleSaveRow = (index) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].isEditing = false;
+        setTableData(updatedTableData);
+    };
+
+    const handleCancelEdit = (index) => {
+        const updatedTableData = [...tableData];
+        if (updatedTableData[index].isEditing) {
+            updatedTableData[index].isEditing = false;
+            setTableData(updatedTableData);
+        }
+    };
+
+    const handleEditRow = (index) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].isEditing = true;
+        setTableData(updatedTableData);
+    };
+
+    // handle Add to Calendar button click
+    const handleAddToCalendar = () => {
+        const finalValues = tableData.map((item) => ({
+            Task: item.Task,
+            Description: item.Description,
+            Status: item.Status,
+            Starttime: "November 5, 2023",
+            Deadline: item.Deadline
+        }));
+        console.log(finalValues);
+        // setSavedValues(finalValues);
     };
 
     return (
@@ -92,14 +129,14 @@ const Upload = () => {
 
                     {isLoading ? (
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <PacmanLoader size={50} />
-                            <p style={{ color: "black" }}>Breaking down your project...</p>
+                            <PacmanLoader color="#F39041" size={50} />
+                            <p style={{ color: "#F39041" }}>Breaking down your project...</p>
                             <button onClick={closeModal}>Close</button>
                         </div>
                     ) : (
                         <div>
                             {/* title */}
-                            <h2 style={{ color: "black" }}>Generated Task List based on your Assignment file</h2>
+                            <h2 style={{ color: "#F39041" }}>Generated Task List based on your Assignment file</h2>
 
                             {/* generated task table */}
                             <table>
@@ -108,6 +145,7 @@ const Upload = () => {
                                         <th>Task</th>
                                         <th>Description</th>
                                         <th>Status</th>
+                                        {/* <th>Start Date</th> */}
                                         <th>Deadline</th>
                                         <th>Actions</th>
                                     </tr>
@@ -117,38 +155,70 @@ const Upload = () => {
                                         <tr key={index}>
                                             {/* <td>{item.Task}</td> */}
                                             <td>
-                                                <input
-                                                    type="text"
-                                                    value={item.Task}
-                                                    onChange={(e) => handleTaskChange(index, e.target.value)}
-                                                />
+                                                {item.isEditing ? (
+                                                    <input
+                                                        type="text"
+                                                        value={item.Task}
+                                                        onChange={(e) => handleTaskChange(index, e.target.value)}
+                                                    />
+                                                ) : (
+                                                    item.Task
+                                                )}
                                             </td>
                                             <td>
-                                                <input
-                                                    type="text"
-                                                    value={item.Description}
-                                                    onChange={(e) => handleDescriptionChange(index, e.target.value)}
-                                                />
+                                                {item.isEditing ? (
+                                                    <input
+                                                        type="text"
+                                                        value={item.Description}
+                                                        onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                                                    />
+                                                ) : (
+                                                    item.Description
+                                                )}
                                             </td>
                                             <td>
-                                                <select
-                                                    value={item.Status}
-                                                    onChange={(e) => handleStatusChange(index, e.target.value)}
-                                                >
-                                                    <option value="Not Started">Not Started</option>
-                                                    <option value="In Progress">In Progress</option>
-                                                    <option value="Completed">Completed</option>
-                                                </select>
+                                                {item.isEditing ? (
+                                                    <select
+                                                        value={item.Status}
+                                                    // onChange={(e) => handleStatusChange(index, e.target.value)}
+                                                    >
+                                                        <option value="Not Started">Not Started</option>
+                                                        <option value="In Progress">In Progress</option>
+                                                        <option value="Completed">Completed</option>
+                                                    </select>
+                                                ) : (
+                                                    item.Status
+                                                )}
                                             </td>
                                             <td>
-                                                <DatePicker
-                                                    selected={new Date(item.Deadline)}
-                                                    onChange={(date) => handleDeadlineChange(index, date)}
-                                                    dateFormat="MMMM d, yyyy"
-                                                />
+                                                {item.isEditing ? (
+                                                    <DatePicker
+                                                        selected={new Date(item.Deadline)}
+                                                        onChange={(date) => handleDeadlineChange(index, date)}
+                                                        dateFormat="MMMM d, yyyy"
+                                                    />
+                                                ) : (
+                                                    item.Deadline
+                                                )}
                                             </td>
                                             <td>
-                                                <FaCog style={{ marginRight: "10px" }} />
+                                                {item.isEditing ? (
+                                                    <>
+                                                        <FaCheck
+                                                            style={{ marginRight: "10px", cursor: "pointer" }}
+                                                            onClick={() => handleSaveRow(index)}
+                                                        />
+                                                        <FaTimes
+                                                            style={{ cursor: "pointer" }}
+                                                            onClick={() => handleCancelEdit(index)}
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <FaCog
+                                                        style={{ marginRight: "10px", cursor: "pointer" }}
+                                                        onClick={() => handleEditRow(index)}
+                                                    />
+                                                )}
                                                 <FaTrash
                                                     style={{ cursor: "pointer" }}
                                                     onClick={() => handleDeleteRow(index)}
@@ -158,7 +228,7 @@ const Upload = () => {
                                     ))}
                                 </tbody>
                             </table>
-                            <button onClick={closeModal}>Add to Calendar</button>
+                            <button onClick={handleAddToCalendar}>Add to Calendar</button>
                             <button onClick={closeModal}>Close</button>
                         </div>
                     )}
