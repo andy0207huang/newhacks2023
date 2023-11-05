@@ -47,7 +47,6 @@ const Home = () => {
 
       {/* g calendar integration */}
       <Upload />
-      {/* <TaskList /> */}
       <AuthButton />
       <Calenderjfg />
 

@@ -5,10 +5,9 @@ import { FaCheck, FaTimes, FaCog, FaTrash } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { TextField, Select } from "@mui/material";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 // import dayjs from "dayjs";
 // import DatePicker from "@mui/lab/DatePicker";
-
 
 import { uploadFile, createEvent } from "../api";
 
@@ -20,8 +19,8 @@ const Upload = () => {
     // generated task list table
     const [tableData, setTableData] = useState([]);
     // edit state task list table
+    const [saved, setSaved] = useState([]);
     const [editedTaskList, setEditedTaskList] = useState([]);
-
 
     // choose file
     const [selectedFile, setSelectedFile] = useState(null);
@@ -46,7 +45,6 @@ const Upload = () => {
             }
         }
     };
-
     // close popup
     const closeModal = () => {
         setIsModalOpen(false);
@@ -54,7 +52,9 @@ const Upload = () => {
 
     // delete row from table
     const handleDeleteRow = (index) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this task?"
+        );
         if (confirmDelete) {
             const updatedTableData = [...tableData];
             updatedTableData.splice(index, 1);
@@ -83,7 +83,13 @@ const Upload = () => {
 
     const handleDeadlineChange = (index, date) => {
         const updatedTableData = [...tableData];
-        updatedTableData[index].Deadline = String(date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
+        updatedTableData[index].Deadline = String(
+            date.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+            })
+        );
         setTableData(updatedTableData);
     };
 
@@ -114,8 +120,8 @@ const Upload = () => {
             Task: item.Task,
             Description: item.Description,
             Status: item.Status,
-            Starttime: String(startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })),
-            Deadline: item.Deadline
+            Starttime: "November 5, 2023",
+            Deadline: item.Deadline,
         }));
         console.log(finalValues);
         // setSavedValues(finalValues);
@@ -298,8 +304,10 @@ const Upload = () => {
                     )}
                 </Modal>
             </div>
+
+
         </>
-    )
-}
+    );
+};
 
 export default Upload;

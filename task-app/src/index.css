@@ -112,3 +112,7 @@ b {
   border-radius: 3px;
   margin: 10px;
 }
+
+td {
+  color: white;
+}
