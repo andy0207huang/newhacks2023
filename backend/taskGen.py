@@ -45,14 +45,9 @@ def getTaskList(doc: str, start: str, end: str) -> list:
     temperature=0
   )
 
-  tasks =  completion.choices[0].message["content"]
+  tasks =  completion.choices[0].message["content"] 
 
-  print(tasks)
-
-  # tasks = tasks.replace("```", "").replace("\n", "").replace("\\", "").replace('json', '')
-
-  # tasks = tasks[:tasks.rfind('}') + 1]
-  
+  tasks = ast.literal_eval(tasks)
 
   return tasks
 
