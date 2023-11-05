@@ -1,4 +1,6 @@
 import os
+import json
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -30,9 +32,9 @@ def pdf_prompt():
 
     # openai free limit of 4096 tokens
     if len(text) > 4096:
-        taskListText = getTaskList(text[0:4095], "November 4th, 2023", "November 30th, 2023")
+        taskListText = getTaskList(text[0:4095], "November 4, 2023", "November 30, 2023")
     else:
-        taskListText = getTaskList(text, "November 4th, 2023", "November 30th, 2023")
+        taskListText = getTaskList(text, "November 4, 2023", "November 30, 2023")
 
     response = jsonify({
         'filename': filename, 
@@ -46,9 +48,9 @@ def pdf_prompt():
 
 @app.route("/createEvent", methods=["POST"])
 def eventCreate():
-    eventList = request.form.get("events")
+    eventList = request.json
 
-    createEvent(eventList)
+    createEvent(eventList['events'])
 
     response = jsonify({
         'msg': "Events Saved in Calendar"

@@ -102,7 +102,17 @@ th {
   margin: 20px auto;
 }
 
+<<<<<<< HEAD
 #cal-url {
+=======
+b {
+  background-image: linear-gradient(to right, #7C8DFD, #F39041);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cal-url {
+>>>>>>> b4d0735f36a7b3824766b5e2c724956f53f8756d
   border-radius: 3px;
   margin: 10px;
 }

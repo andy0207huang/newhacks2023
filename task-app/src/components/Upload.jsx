@@ -136,11 +136,34 @@ const Upload = () => {
     }
   };
 
+<<<<<<< HEAD
   //   const addToArray = (arr) => {
   //     setSaved((prevArr) => [...prevArr, arr]);
   //   };
 
   //   addToArray(tableData)
+=======
+        try {
+            const data = await createEvent(finalValues);
+            console.log(data.msg);
+        } catch (error) {
+            console.error(error);
+            // Handle error case
+        }
+    };
+
+    // AddTask
+    const handleAddTask = () => {
+        const newTask = {
+            Task: "",
+            Description: "",
+            Status: "Not Started",
+            Deadline: new Date(),
+            isEditing: true,
+        };
+        setTableData([...tableData, newTask]);
+    };
+>>>>>>> b4d0735f36a7b3824766b5e2c724956f53f8756d
 
   return (
     <>
@@ -151,6 +174,7 @@ const Upload = () => {
           Upload
         </button>
 
+<<<<<<< HEAD
         <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
           {isLoading ? (
             <div
@@ -163,6 +187,131 @@ const Upload = () => {
               <PacmanLoader color="#F39041" size={50} />
               <p style={{ color: "#F39041" }}>Breaking down your project...</p>
               <button onClick={closeModal}>Close</button>
+=======
+                <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+
+                    {isLoading ? (
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <PacmanLoader color="#F39041" size={50} />
+                            <p style={{ color: "#F39041" }}>Breaking down your project...</p>
+                            <button onClick={closeModal}>Close</button>
+                        </div>
+                    ) : (
+                        <div>
+                            {/* title */}
+                            <h2 style={{ color: "#F39041" }}>Generated Task List based on your Assignment file</h2>
+
+                            {/* generated task table */}
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        {/* <th>Start Date</th> */}
+                                        <th>Deadline</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {tableData.map((item, index) => (
+                                        <tr key={index}>
+                                            {/* <td>{item.Task}</td> */}
+                                            <td>
+                                                {item.isEditing ? (
+                                                    <TextField
+                                                        required
+                                                        type="text"
+                                                        value={item.Task}
+                                                        fullWidth
+                                                        label="Task"
+                                                        onChange={(e) => handleTaskChange(index, e.target.value)}
+                                                        multiline
+                                                        maxRows={4}
+                                                    />
+                                                ) : (
+                                                    item.Task
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.isEditing ? (
+                                                    <TextField
+                                                        required
+                                                        type="text"
+                                                        value={item.Description}
+                                                        fullWidth
+                                                        label="Description"
+                                                        onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                                                        multiline
+                                                        maxRows={4}
+                                                    />
+                                                ) : (
+                                                    item.Description
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.isEditing ? (
+                                                    // <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                                    <Select
+                                                        value={item.Status}
+                                                        onChange={(e) => handleStatusChange(index, e.target.value)}
+                                                    >
+                                                        <MenuItem value="Not Started">Not Started</MenuItem>
+                                                        <MenuItem value="In Progress">In Progress</MenuItem>
+                                                        <MenuItem value="Completed">Completed</MenuItem>
+                                                    </Select>
+                                                    // </FormControl>
+                                                ) : (
+                                                    item.Status
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.isEditing ? (
+                                                    <DatePicker
+                                                        selected={new Date(item.Deadline)}
+                                                        // value = {dayjs(item.Deadline)}
+                                                        onChange={(date) => handleDeadlineChange(index, date)}
+                                                        dateFormat="MMMM d, yyyy"
+                                                    />
+                                                ) : (
+                                                    item.Deadline
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.isEditing ? (
+                                                    <>
+                                                        <FaCheck
+                                                            style={{ marginRight: "10px", cursor: "pointer", color: "green" }}
+                                                            onClick={() => handleSaveRow(index)}
+                                                        />
+                                                        <FaTimes
+                                                            style={{ cursor: "pointer", color: "red" }}
+                                                            onClick={() => handleCancelEdit(index)}
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <FaCog
+                                                        style={{ marginRight: "10px", cursor: "pointer", color: "gray" }}
+                                                        onClick={() => handleEditRow(index)}
+                                                    />
+                                                )}
+                                                <FaTrash
+                                                    style={{ cursor: "pointer" }}
+                                                    onClick={() => handleDeleteRow(index)}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+
+                            <button onClick={handleAddTask}>Add Task</button>
+                            <button onClick={handleAddToCalendar}>Add to Calendar</button>
+                            <button onClick={closeModal}>Close</button>
+                        </div>
+                    )}
+                </Modal>
+>>>>>>> b4d0735f36a7b3824766b5e2c724956f53f8756d
             </div>
           ) : (
             <div>
