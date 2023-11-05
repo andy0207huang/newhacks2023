@@ -89,6 +89,7 @@ const Upload = () => {
                             </table>
                         </div>
                     )}
+                    <button onClick={closeModal}>Add to Calendar</button>
                     <button onClick={closeModal}>Close</button>
                 </Modal>
             </div>
