@@ -8,7 +8,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -30,7 +30,7 @@ if not creds or not creds.valid:
 
 service = build('calendar', 'v3', credentials=creds)
 
-def createEvent(data: dict, start: str,):
+def createEvent(datas: list, start: str,):
 
     months = {
         'Jan': 1,
@@ -58,51 +58,50 @@ def createEvent(data: dict, start: str,):
 
     startYear = startList[2]
 
-    endList = data['Deadline'].split(' ')
+    for data in datas:
 
-    if len(endList[0]) > 2:
-        endList[0] = endList[0][:3]
+        endList = data['Deadline'].split(' ')
 
-    endMonth = months[endList[0]]
+        if len(endList[0]) > 2:
+            endList[0] = endList[0][:3]
 
-    endDay = endList[1].replace(',', '').zfill(2)
+        endMonth = months[endList[0]]
 
-    endYear = endList[2]
+        endDay = endList[1].replace(',', '').zfill(2)
 
-    startDate = f"{startYear}-{startMonth}-{startDay}"
+        endYear = endList[2]
 
-    endDate = f"{endYear}-{endMonth}-{endDay}"
+        startDate = f"{startYear}-{startMonth}-{startDay}"
 
-    print(startDate, endDate)
+        endDate = f"{endYear}-{endMonth}-{endDay}"
 
-    dateFormat = "%Y-%m-%d"
 
-    startDate = datetime.strptime(startDate, dateFormat).date()
-    endDate = datetime.strptime(endDate, dateFormat).date()
+        dateFormat = "%Y-%m-%d"
+
+        startDate = datetime.strptime(startDate, dateFormat).date()
+        endDate = datetime.strptime(endDate, dateFormat).date()
     
-    event = {
-        'summary': data['Task'],
-        'description': data['Description'],
-        'start':{
-            'date': startDate
-        },
-        'end':{
-            'date': endDate
+        event = {
+            'summary': data['Task'],
+            'description': data['Description'],
+            'start':{
+                'date': startDate
+            },
+            'end':{
+                'date': endDate
+            }
         }
-    }
 
-    print(event)
-
-    event = service.events().insert(calendarId='primary', body=event).execute()
+        event = service.events().insert(calendarId='primary', body=event).execute()
 
 
 if __name__ == "__main__":
-    data = {
+    data = [{
         'Task': 'Test',
         'Description': 'Testing Test Code',
         'Status': 'Not Started',
         'Deadline': 'November 6, 2023'
-    }
+    }]
 
     start = 'November 4, 2023'
 
