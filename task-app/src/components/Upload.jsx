@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { PacmanLoader } from "react-spinners";
-
+import { FaCog, FaTrash } from "react-icons/fa";
 
 import { uploadFile } from "../api";
 
@@ -42,6 +42,16 @@ const Upload = () => {
         setIsModalOpen(false);
     };
 
+    // delete row from table
+    const handleDeleteRow = (index) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+        if (confirmDelete) {
+            const updatedTableData = [...tableData];
+            updatedTableData.splice(index, 1);
+            setTableData(updatedTableData);
+        }
+    };
+
     return (
         <>
             <div>
@@ -56,14 +66,15 @@ const Upload = () => {
                 <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
 
                     {isLoading ? (
-                        <div>
+                        <div style={{display: "flex", flexDirection: "column",alignItems: "center"}}>
                             <PacmanLoader size={50} />
-                            <p style={{ color: "black" }}>Breaking down...</p>
+                            <p style={{ color: "black" }}>Breaking down your project...</p>
+                            <button onClick={closeModal}>Close</button>
                         </div>
                     ) : (
                         <div>
                             {/* title */}
-                            <h2 style={{ color: "black" }}>Test Response</h2>
+                            <h2 style={{ color: "black" }}>Generated Task List based on your Assignment file</h2>
                             {/* <p style={{ color: "black" }}>{testResponse}</p> */}
 
                             {/* generated task table */}
@@ -74,6 +85,7 @@ const Upload = () => {
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Deadline</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,14 +95,21 @@ const Upload = () => {
                                             <td>{item.Description}</td>
                                             <td>{item.Status}</td>
                                             <td>{item.Deadline}</td>
+                                            <td>
+                                                <FaCog style={{ marginRight: "10px" }} />
+                                                <FaTrash
+                                                    style={{ cursor: "pointer" }}
+                                                    onClick={() => handleDeleteRow(index)}
+                                                />
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
+                            <button onClick={closeModal}>Add to Calendar</button>
+                            <button onClick={closeModal}>Close</button>
                         </div>
                     )}
-                    <button onClick={closeModal}>Add to Calendar</button>
-                    <button onClick={closeModal}>Close</button>
                 </Modal>
             </div>
         </>
