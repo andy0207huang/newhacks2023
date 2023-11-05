@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
+import "../index.css";
 
 export default function AuthButton() {
   const responseGoogle = (response) => {
@@ -11,6 +12,7 @@ export default function AuthButton() {
   return (
     <div>
       <GoogleLogin
+        className="auth-btn"
         clientId="261810734464-cftl1m5mi5nqpfsagmn09h09cg152tc1.apps.googleusercontent.com"
         buttonText="Sign In & Authenticate Calendar"
         onSuccess={responseGoogle}

@@ -9,7 +9,7 @@ export default function Calendarjfg() {
         src="https://embed.styledcalendar.com/#LkGMOk5NB7mv2ULOHIOV"
         title="Styled Calendar"
         className="styled-calendar-container"
-        style={{ width: "100%", border: "none", height: "500px" }}
+        style={{ width: "100%", border: "none", height: "400px" }}
         data-cy="calendar-embed-iframe"
       ></iframe>
       <script

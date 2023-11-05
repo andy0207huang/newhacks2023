@@ -4,31 +4,10 @@ import AuthButton from "../components/AuthButton";
 
 import logo from "../assets/breakject.ai-s.png";
 import { uploadFile } from "../api";
+import TaskList from "../components/TaskList";
 
 const Home = () => {
   // upload file
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
-
-  // backend test
-  const [testResponse, setTestResponse] = useState("");
-
-  const handleUploadClick = async () => {
-    if (selectedFile) {
-      try {
-        const response = await uploadFile(selectedFile);
-        console.log(response);
-        // Handle the response as needed
-        setTestResponse(response.filename);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   return (
     <div>
@@ -44,16 +23,17 @@ const Home = () => {
       </p>
 
       {/* g calendar integration */}
+      <TaskList />
       <AuthButton />
       <Calenderjfg />
 
-      {/* upload */}
+      {/* upload
       <input type="file" onChange={handleFileUpload} />
       <button onClick={handleUploadClick} disabled={!selectedFile}>
         Upload
       </button>
 
-      <p>Test Response: {testResponse}</p>
+      <p>Test Response: {testResponse}</p> */}
     </div>
   );
 };

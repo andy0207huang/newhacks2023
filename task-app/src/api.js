@@ -1,18 +1,18 @@
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = "http://localhost:8080";
 
 // Upload assignment pdf
 export const uploadFile = async (file) => {
   try {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     const response = await fetch(`${BASE_URL}/pdf2break`, {
-      method: 'POST',
+      method: "POST",
       body: formData,
     });
 
     if (!response.ok) {
-      throw new Error('File upload failed');
+      throw new Error("File upload failed");
     }
 
     const data = await response.json();

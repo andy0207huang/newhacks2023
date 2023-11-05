@@ -24,11 +24,13 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 100px;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  text-align: center;
+  justify-content: center;
 }
 
 h1 {
@@ -73,20 +75,27 @@ iframe {
   border: 1px solid #ccc; /* Add a border if desired */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow if desired */
   margin: 0 auto; /* Center horizontally */
+  /* Center vertically */
+  border-radius: 20px;
+}
+
+.calendar-container {
   display: flex;
-  justify-content: center; /* Center vertically */
+  justify-content: center;
   align-items: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+td,
+tr,
+th {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+th {
+  background-color: gray;
+}
+
+.auth-btn {
+  margin: 20px auto;
 }
