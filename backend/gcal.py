@@ -1,6 +1,7 @@
 import os.path
 
 from datetime import datetime
+from dateutil.parser import parse
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -53,39 +54,52 @@ def createEvent(datas: list):
 
     for data in datas:
 
+        # startList = data['Starttime'].split(' ')
         
-
-        startList = data['Starttime'].split(' ')
-        
-        if len(startList[0]) > 2:
-            startList[0] = startList[0][:3]
+        # if len(startList[0]) > 2:
+        #     startList[0] = startList[0][:3]
 
         
-        startMonth = months[startList[0]]
+        # startMonth = months[startList[0]]
 
-        startDay = startList[1].replace(',', '').zfill(2)
+        # startDay = startList[1].replace(',', '').zfill(2)
 
-        startYear = startList[2]
-        endList = data['Deadline'].split(' ')
+        # startYear = startList[2]
+        # endList = data['Deadline'].split(' ')
 
-        if len(endList[0]) > 2:
-            endList[0] = endList[0][:3]
+        
 
-        endMonth = months[endList[0]]
+        # if len(endList[0]) > 2:
+        #     endList[0] = endList[0][:3]
 
-        endDay = endList[1].replace(',', '').zfill(2)
+        # endMonth = months[endList[0]]
 
-        endYear = endList[2]
+        # if endList[1].endswith('th'):
 
-        startDate = f"{startYear}-{startMonth}-{startDay}"
+        #     endList[1] = endList[1].replace('th','')
 
-        endDate = f"{endYear}-{endMonth}-{endDay}"
+        # elif endList[1].endswith('st'):
+        #     endList[1] = endList[1].replace('st','')
+
+        # if len(endList[1]) > 2:
+        #     endList[1] = endList[1][:3]
+
+
+        # endDay = endList[1].replace(',', '').zfill(2)
+
+        # print(endDay)
+
+        # endYear = endList[2]
+
+        # startDate = f"{startYear}-{startMonth}-{startDay}"
+
+        # endDate = f"{endYear}-{endMonth}-{endDay}"
 
 
         dateFormat = "%Y-%m-%d"
 
-        startDate = datetime.strptime(startDate, dateFormat).date()
-        endDate = datetime.strptime(endDate, dateFormat).date()
+        startDate = parse(data['Starttime']).date()
+        endDate = parse(data['Deadline']).date()
     
         event = {
             'summary': data['Task'],

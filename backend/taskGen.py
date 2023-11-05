@@ -3,7 +3,6 @@ import openai
 import json
 import ast
 
-
 from dotenv import load_dotenv
 
 load_dotenv('.env')

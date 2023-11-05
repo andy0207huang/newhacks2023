@@ -32,9 +32,9 @@ def pdf_prompt():
 
     # openai free limit of 4096 tokens
     if len(text) > 4096:
-        taskListText = getTaskList(text[0:4095], "November 4th, 2023", "November 30th, 2023")
+        taskListText = getTaskList(text[0:4095], "November 4, 2023", "November 30, 2023")
     else:
-        taskListText = getTaskList(text, "November 4th, 2023", "November 30th, 2023")
+        taskListText = getTaskList(text, "November 4, 2023", "November 30, 2023")
 
     response = jsonify({
         'filename': filename, 
