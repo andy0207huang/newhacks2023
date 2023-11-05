@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 from doc import getDoc
 from taskGen import getTaskList
+from gcal import createEvent
 
 app = Flask(__name__)
 
@@ -43,6 +44,17 @@ def pdf_prompt():
 
     return response
 
+@app.route("/createEvent", methods=["POST"])
+def eventCreate():
+    eventList = request.form.get("events")
+
+    createEvent(eventList)
+
+    response = jsonify({
+        'msg': "Events Saved in Calendar"
+    })
+
+    return response
 
 # TEST
 @app.route("/test", methods=["GET"])
@@ -51,9 +63,6 @@ def backend_function():
     response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
     return response
 
-@app.route("/getTasks", methods=["POST"])
-def getTasks():
-    pass
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

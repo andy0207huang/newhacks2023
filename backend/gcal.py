@@ -30,7 +30,7 @@ if not creds or not creds.valid:
 
 service = build('calendar', 'v3', credentials=creds)
 
-def createEvent(datas: list, start: str,):
+def createEvent(datas: list):
 
     months = {
         'Jan': 1,
@@ -47,18 +47,20 @@ def createEvent(datas: list, start: str,):
         'Dec': 12
     }
 
-    startList = start.split(' ')
-
-    if len(startList[0]) > 2:
-        startList[0] = startList[0][:3]
-
-    startMonth = months[startList[0]]
-
-    startDay = startList[1].replace(',', '').zfill(2)
-
-    startYear = startList[2]
+    
 
     for data in datas:
+
+        startList = data['Starttime'].split(' ')
+
+        if len(startList[0]) > 2:
+            startList[0] = startList[0][:3]
+
+        startMonth = months[startList[0]]
+
+        startDay = startList[1].replace(',', '').zfill(2)
+
+        startYear = startList[2]
 
         endList = data['Deadline'].split(' ')
 
@@ -100,9 +102,8 @@ if __name__ == "__main__":
         'Task': 'Test',
         'Description': 'Testing Test Code',
         'Status': 'Not Started',
+        'Starttime': 'November 4, 2023',
         'Deadline': 'November 6, 2023'
     }]
 
-    start = 'November 4, 2023'
-
-    createEvent(data, start)
+    createEvent(data)
