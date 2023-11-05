@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Calenderjfg from "../components/Calendar";
 import AuthButton from "../components/AuthButton";
+import Upload from "../components/Upload";
 
 import logo from "../assets/breakject.ai-s.png";
 import { uploadFile } from "../api";
@@ -44,6 +45,7 @@ const Home = () => {
         deadlines for enhanced productivity.
       </p>
       {/* g calendar integration */}
+      <Upload />
       <TaskList />
       <AuthButton />
       <Calenderjfg />
