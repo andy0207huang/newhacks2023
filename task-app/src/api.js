@@ -23,6 +23,29 @@ export const uploadFile = async (file) => {
   }
 };
 
+// Create event
+export const createEvent = async (events) => {
+  try {
+    const response = await fetch(`${BASE_URL}/createEvent`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ events }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create event");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 // TEST
 // export const testBackend = async () => {
 //     try {

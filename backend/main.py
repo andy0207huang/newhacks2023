@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 from doc import getDoc
 from taskGen import getTaskList
-from gcal import createEvent
+# from gcal import createEvent
 
 app = Flask(__name__)
 
@@ -44,17 +44,17 @@ def pdf_prompt():
 
     return response
 
-@app.route("/createEvent", methods=["POST"])
-def eventCreate():
-    eventList = request.form.get("events")
+# @app.route("/createEvent", methods=["POST"])
+# def eventCreate():
+#     eventList = request.form.get("events")
 
-    createEvent(eventList)
+#     createEvent(eventList)
 
-    response = jsonify({
-        'msg': "Events Saved in Calendar"
-    })
+#     response = jsonify({
+#         'msg': "Events Saved in Calendar"
+#     })
 
-    return response
+#     return response
 
 # TEST
 @app.route("/test", methods=["GET"])
