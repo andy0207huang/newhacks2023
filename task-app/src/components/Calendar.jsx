@@ -22,13 +22,29 @@
 // }
 
 import React, { Component } from "react";
-import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
+import { Calendar } from "@fullcalendar/core";
+import googleCalendarPlugin from "@fullcalendar/google-calendar";
+
+let pageToken = null;
+
+function listCalendarEntries() {
+  gapi.client.calendar.calendarList
+    .list({
+      pageToken: pageToken,
+    })
+    .then((response) => {
+      const calendarList = response.result;
+      console.log(calendarList.items[0].id);
+      return calendarList.items[0].id;
+    });
+}
 
 class CalendarIntegration extends Component {
   state = {
     events: [],
     isSignedIn: false,
+    calendarId: null, // Added calendarId state to store the calendar ID
   };
 
   componentDidMount() {
@@ -39,9 +55,9 @@ class CalendarIntegration extends Component {
   initClient = () => {
     gapi.client
       .init({
-        apiKey: "AIzaSyDPhy4N3NwjXPfLQYZo963BVHF6Z2qsOsg",
+        apiKey: "AIzaSyCw2ejQz3DQoXmpKeG269e-1TMAP57YBmw", // Replace with your API key
         clientId:
-          "261810734464-cftl1m5mi5nqpfsagmn09h09cg152tc1.apps.googleusercontent.com",
+          "261810734464-cftl1m5mi5nqpfsagmn09h09cg152tc1.apps.googleusercontent.com", // Replace with your client ID
         discoveryDocs: [
           "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
         ],
@@ -63,43 +79,63 @@ class CalendarIntegration extends Component {
     this.setState({ isSignedIn });
 
     if (isSignedIn) {
+      this.fetchCalendarId(); // Fetch the calendar ID after signing in
       this.fetchCalendarEvents();
     }
   };
 
-  fetchCalendarEvents = () => {
-    gapi.client.calendar.events
-      .list({
-        calendarId: "primary", // Use 'primary' for the user's primary calendar
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        orderBy: "startTime",
-      })
+  fetchCalendarId = () => {
+    // Fetch the calendar ID of the user's primary calendar
+    gapi.client.calendar.calendarList
+      .list()
       .then((response) => {
-        const events = response.result.items;
-        this.setState({ events });
+        const primaryCalendar = response.result.items.find(
+          (calendar) => calendar.primary
+        );
+        if (primaryCalendar) {
+          this.setState({ calendarId: primaryCalendar.id });
+        }
       })
       .catch((error) => {
-        console.error("Error fetching calendar events:", error);
+        console.error("Error fetching calendar ID:", error);
       });
   };
 
+  fetchCalendarEvents = () => {
+    const { calendarId } = this.state;
+    if (calendarId) {
+      // Fetch calendar events for the user's primary calendar
+      gapi.client.calendar.events
+        .list({
+          calendarId: calendarId,
+          timeMin: new Date().toISOString(),
+          showDeleted: false,
+          singleEvents: true,
+          orderBy: "startTime",
+        })
+        .then((response) => {
+          const events = response.result.items;
+          this.setState({ events });
+        })
+        .catch((error) => {
+          console.error("Error fetching calendar events:", error);
+        });
+    }
+  };
+
   render() {
-    const { events, isSignedIn } = this.state;
+    const { isSignedIn } = this.state;
 
     return (
       <div>
         {isSignedIn ? (
           <div>
-            <h2>Your Calendar Events:</h2>
-            <ul>
-              {events.map((event) => (
-                <li key={event.id}>
-                  {event.summary} - {event.start.dateTime}
-                </li>
-              ))}
-            </ul>
+            <h2>Your Embedded Google Calendar:</h2>
+            <iframe
+              src={`https://calendar.google.com/calendar/embed?src=${listCalendarEntries}`}
+              title="Embedded Google Calendar"
+              style={{ border: "0", width: "800px", height: "600px" }}
+            ></iframe>
           </div>
         ) : (
           <div>
