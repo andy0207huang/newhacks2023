@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { PacmanLoader } from "react-spinners";
 import { FaCog, FaTrash } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { uploadFile } from "../api";
 
@@ -52,6 +54,31 @@ const Upload = () => {
         }
     };
 
+    // columns
+    const handleTaskChange = (index, value) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].Task = value;
+        setTableData(updatedTableData);
+    };
+
+    const handleDescriptionChange = (index, value) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].Description = value;
+        setTableData(updatedTableData);
+    };
+
+    const handleStatusChange = (index, value) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].Status = value;
+        setTableData(updatedTableData);
+    };
+
+    const handleDeadlineChange = (index, date) => {
+        const updatedTableData = [...tableData];
+        updatedTableData[index].Deadline = date;
+        setTableData(updatedTableData);
+    };
+
     return (
         <>
             <div>
@@ -61,12 +88,10 @@ const Upload = () => {
                     Upload
                 </button>
 
-                {/* <p>Test Response: {testResponse}</p> */}
-
                 <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
 
                     {isLoading ? (
-                        <div style={{display: "flex", flexDirection: "column",alignItems: "center"}}>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <PacmanLoader size={50} />
                             <p style={{ color: "black" }}>Breaking down your project...</p>
                             <button onClick={closeModal}>Close</button>
@@ -75,7 +100,6 @@ const Upload = () => {
                         <div>
                             {/* title */}
                             <h2 style={{ color: "black" }}>Generated Task List based on your Assignment file</h2>
-                            {/* <p style={{ color: "black" }}>{testResponse}</p> */}
 
                             {/* generated task table */}
                             <table>
@@ -91,10 +115,38 @@ const Upload = () => {
                                 <tbody>
                                     {tableData.map((item, index) => (
                                         <tr key={index}>
-                                            <td>{item.Task}</td>
-                                            <td>{item.Description}</td>
-                                            <td>{item.Status}</td>
-                                            <td>{item.Deadline}</td>
+                                            {/* <td>{item.Task}</td> */}
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={item.Task}
+                                                    onChange={(e) => handleTaskChange(index, e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    type="text"
+                                                    value={item.Description}
+                                                    onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <select
+                                                    value={item.Status}
+                                                    onChange={(e) => handleStatusChange(index, e.target.value)}
+                                                >
+                                                    <option value="Not Started">Not Started</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Completed">Completed</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <DatePicker
+                                                    selected={new Date(item.Deadline)}
+                                                    onChange={(date) => handleDeadlineChange(index, date)}
+                                                    dateFormat="MMMM d, yyyy"
+                                                />
+                                            </td>
                                             <td>
                                                 <FaCog style={{ marginRight: "10px" }} />
                                                 <FaTrash
