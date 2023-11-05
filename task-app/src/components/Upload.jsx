@@ -36,7 +36,7 @@ const Upload = () => {
         setIsModalOpen(true);
         if (selectedFile) {
             try {
-                const response = await uploadFile(selectedFile);
+                const response = await uploadFile(selectedFile, String(startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })), String(endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })));
                 console.log(response.text);
                 setTableData(response.text);
             } catch (error) {
@@ -114,7 +114,7 @@ const Upload = () => {
             Task: item.Task,
             Description: item.Description,
             Status: item.Status,
-            Starttime: "November 5, 2023",
+            Starttime: String(startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })),
             Deadline: item.Deadline
         }));
         console.log(finalValues);
@@ -141,9 +141,33 @@ const Upload = () => {
         setTableData([...tableData, newTask]);
     };
 
+
+    // TEST
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
+
     return (
         <>
             <div>
+                {/* TEST */}
+                <div>
+                    <p>Project Start Date</p>
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    placeholderText="Select start date"
+                    dateFormat="MMMM d, yyyy"
+                />
+                <p>Project End Date</p>
+                <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    placeholderText="Select end date"
+                    dateFormat="MMMM d, yyyy"
+                />
+                </div>
+
                 <input type="file" onChange={handleFileUpload} />
                 {/* <PacmanLoader size={50} /> */}
                 <button onClick={handleUploadClick} disabled={!selectedFile}>
