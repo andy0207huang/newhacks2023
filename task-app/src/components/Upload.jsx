@@ -22,6 +22,7 @@ const Upload = () => {
     // edit state task list table
     const [editedTaskList, setEditedTaskList] = useState([]);
 
+    const [startDate, setStartDate] = useState();
 
     // choose file
     const [selectedFile, setSelectedFile] = useState(null);
