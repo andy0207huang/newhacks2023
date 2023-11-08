@@ -9,7 +9,7 @@
     <img src="task-app/src/assets/breakject.ai-blue.png" alt="Logo" width="150" height="150">
   </a>
   
-  <h3 align="center">NewHacks 2023, UOFT, November 4-5, 2023</h3>
+  <h3 align="center">breakject.ai - NewHacks 2023, UOFT, November 4-5, 2023</h3>
 
   <p>Very creative attemp on Best Use of Github for our logo.</p>
 
