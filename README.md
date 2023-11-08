@@ -52,7 +52,7 @@
 <!-- [product-screenshot-1] -->
 <div align="center">
 
-  ![Alt Text](task-app\src\assets\breakject.ai-gif-1.gif)
+  ![Alt Text](https://github.com/andy0207huang/newhacks2023/blob/main/task-app/src/assets/breakject.ai-gif-1.gif)
 
 </div>
 
