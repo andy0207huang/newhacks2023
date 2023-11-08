@@ -112,3 +112,27 @@ b {
   border-radius: 3px;
   margin: 10px;
 }
+
+td {
+  color: black;
+}
+
+.logo {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  left: 0;
+  animation: spinAndMove 5s linear infinite;
+}
+
+@keyframes spinAndMove {
+  0% {
+    transform: translateX(-100%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(100vw) rotate(360deg);
+  }
+  100% {
+    transform: translateX(-100%) rotate(720deg);
+  }
+}

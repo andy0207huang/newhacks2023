@@ -5,7 +5,7 @@ import Upload from "../components/Upload";
 
 import logo from "../assets/breakject.ai-wname.png";
 import { uploadFile } from "../api";
-import TaskList from "../components/TaskList";
+// import TaskList from "../components/TaskList";
 
 const Home = () => {
   // upload file
@@ -39,6 +39,12 @@ const Home = () => {
         style={{ height: "150px", width: "150px" }}
         alt="breakject.ai Logo"
       />
+      <img
+        src={logo}
+        className="logo"
+        style={{ height: "150px", width: "150px" }}
+        alt="breakject.ai Logo"
+      />
       <h1>Welcome to breakject.ai!</h1>
       <p>
         An AI-integration tool that automatically <b>breaks down</b> your <b>projects</b> and assignments into smaller tasks and
@@ -47,7 +53,6 @@ const Home = () => {
 
       {/* g calendar integration */}
       <Upload />
-      {/* <TaskList /> */}
       <AuthButton />
       <Calenderjfg />
 

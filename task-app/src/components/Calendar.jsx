@@ -22,7 +22,7 @@ export default function Calendarjfg() {
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            id="cal-url"
+            id="r"
           />
         </label>
         <input type="submit" />
