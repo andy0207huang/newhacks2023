@@ -96,9 +96,9 @@
 
 <!-- CONTACT -->
 ## Contact
-* Andy Huang - <img src="task-app/src/assets/Andy-Huang-2.jpg" alt="Logo" width="30" height="30"> [![LinkedIn][linkedin-shield-andy]][linkedin-url-andy]
-* Surya Sure - <img src="task-app/src/assets/Surya-Sure.jpeg" alt="Logo" width="30" height="30"> [![LinkedIn][linkedin-shield-surya]][linkedin-url-surya]
-* Marcus Tuen Muk - <img src="task-app/src/assets/Marcus-Tuen-Muk.jpg" alt="Logo" width="30" height="30"> [![LinkedIn][linkedin-shield-marcus]][linkedin-url-marcus]
+* Andy Huang - <a href="https://github.com/andy0207huang"><img src="task-app/src/assets/Andy-Huang-2.jpg" alt="Logo" width="30" height="30"></a> [![LinkedIn][linkedin-shield-andy]][linkedin-url-andy]
+* Surya Sure - <a href="https://github.com/SurjaHead"><img src="task-app/src/assets/Surya-Sure.jpeg" alt="Logo" width="30" height="30"></a> [![LinkedIn][linkedin-shield-surya]][linkedin-url-surya]
+* Marcus Tuen Muk - <a href="https://github.com/PikaKight"><img src="task-app/src/assets/Marcus-Tuen-Muk.jpg" alt="Logo" width="30" height="30"></a> [![LinkedIn][linkedin-shield-marcus]][linkedin-url-marcus]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
